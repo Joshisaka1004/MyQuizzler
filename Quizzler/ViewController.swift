@@ -26,8 +26,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scoreLabel.text = "Score: \(score)"
-        progressLabel.text = "\(questionNumber + 1) / 15"
+        updateUI()
         nextQuestion()
         print(myQuestions.list.count)
     }
@@ -44,6 +43,7 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
+        progressBar.frame.size.width = (view.frame.size.width / 15) * CGFloat(questionNumber + 1)
         progressLabel.text = "\(questionNumber + 1) / 15"
         scoreLabel.text = "Score: \(score)"
         nextQuestion()
@@ -61,22 +61,28 @@ class ViewController: UIViewController {
             score += 1
             if questionNumber < 14 {
                 questionNumber += 1
+                updateUI()
             } else {
                 questionNumber = 0
+                startOver()
             }
             
         } else {
             ProgressHUD.showError("Leider falsch!")
             score -= 2
+            updateUI()
         }
-        updateUI()
     }
     
     
     func startOver() {
-       
+        score = 0
+        let myAC = UIAlertController(title: "Ende", message: "Neue Runde gefällig?", preferredStyle: .alert)
+        let myAction = UIAlertAction(title: "OK", style: .default, handler: {
+            (UIAlertAction) in self.updateUI()
+        })
+        myAC.addAction(myAction)
+        present(myAC, animated: true)
     }
-    
-
     
 }
