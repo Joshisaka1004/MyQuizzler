@@ -43,8 +43,8 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
-        progressBar.frame.size.width = (view.frame.size.width / 15) * CGFloat(questionNumber + 1)
-        progressLabel.text = "\(questionNumber + 1) / 15"
+        progressBar.frame.size.width = (view.frame.size.width / CGFloat(myQuestions.list.count)) * CGFloat(questionNumber + 1)
+        progressLabel.text = "\(questionNumber + 1) / \(myQuestions.list.count)"
         scoreLabel.text = "Score: \(score)"
         nextQuestion()
     }
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         if userAnswer == myQuestions.list[questionNumber].answer {
             ProgressHUD.showSuccess("Super!")
             score += 1
-            if questionNumber < 14 {
+            if questionNumber < myQuestions.list.count - 1 {
                 questionNumber += 1
                 updateUI()
             } else {

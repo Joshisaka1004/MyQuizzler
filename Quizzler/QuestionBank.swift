@@ -24,6 +24,8 @@ class QuestionBank {
         // I add a second of my own quetions in the compact way
         list.append(Question(text: "Die Hauptstadt von Dänemark ist Kopenhagen", correctAnswer: true))
         
+        list.append(Question(text: "Die Quadratwurzel aus 81 entspricht dem Produkt von 2 und 4", correctAnswer: false))
+        
         // skipping one step and just creating the quiz item inside the append function
         list.append(Question(text: "A slug\'s blood is green.", correctAnswer: true))
         
